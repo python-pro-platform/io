@@ -1,0 +1,1 @@
+pip install scapy python-nmap psutil requests rich colorama netifaces
