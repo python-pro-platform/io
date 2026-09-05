@@ -109,6 +109,27 @@
             overflow: hidden;
         }
 
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(5, 8, 15, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+        }
+
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -272,8 +293,13 @@
         <main>
             <!-- شاشة عرض القائمة الرئيسية -->
             <div id="view-home">
-                <h2 style="color: var(--primary-color); border-bottom: 2px solid var(--border-color); padding-bottom: 10px;">📦 الأدوات والسكريبتات المتاحة</h2>
+                <h2 style="color: var(--primary-color); border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 20px;">📦 الأدوات والسكريبتات المتاحة</h2>
                 
+                <!-- حقل البحث المضاف -->
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن أداة أو سكريبت بايثون..." onkeyup="filterTools()">
+                </div>
+
                 <!-- إعلان بانر 2 -->
                 <div class="ad-banner-container">
                     <script>
@@ -375,6 +401,7 @@
     <script>
         let GITHUB_USER = '';
         let GITHUB_REPO = '';
+        let allToolsData = [];
 
         function detectGitHubInfo() {
             const hostname = window.location.hostname; 
@@ -404,34 +431,43 @@
                 if (!response.ok) throw new Error('فشل الاتصال بالمستودع');
                 
                 let tools = await response.json();
+                allToolsData = tools.filter(tool => tool.type === 'dir');
                 
-                listContainer.innerHTML = '';
-                let foundTools = false;
-
-                tools.forEach(tool => {
-                    if(tool.type === 'dir') {
-                        foundTools = true;
-                        listContainer.innerHTML += `
-                            <div class="tool-card">
-                                <div>
-                                    <div class="tool-card-header">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/3242/3242257.png" alt="Tool Icon">
-                                        <h3>${tool.name}</h3>
-                                    </div>
-                                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">سكريبت بايثون جاهز للاستخدام والتحميل الفوري.</p>
-                                </div>
-                                <button class="btn-modern" onclick="openTool('${tool.name}')">عرض الأداة</button>
-                            </div>
-                        `;
-                    }
-                });
-
-                if (!foundTools) {
-                    listContainer.innerHTML = '<p style="color: var(--primary-color); grid-column: 1/-1; text-align: center;">لم يتم العثور على أدوات داخل مجلد (py).</p>';
-                }
+                renderTools(allToolsData);
             } catch (error) {
                 listContainer.innerHTML = `<p style="color: #ef4444; grid-column: 1/-1; text-align: center;">تأكد من وجود مجلد باسم <b>py</b> في مستودعك على جيت هوب.</p>`;
             }
+        }
+
+        function renderTools(tools) {
+            const listContainer = document.getElementById('tools-list');
+            listContainer.innerHTML = '';
+
+            if (tools.length === 0) {
+                listContainer.innerHTML = '<p style="color: var(--primary-color); grid-column: 1/-1; text-align: center;">لم يتم العثور على نتائج مطابقة للبحث.</p>';
+                return;
+            }
+
+            tools.forEach(tool => {
+                listContainer.innerHTML += `
+                    <div class="tool-card">
+                        <div>
+                            <div class="tool-card-header">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3242/3242257.png" alt="Tool Icon">
+                                <h3>${tool.name}</h3>
+                            </div>
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">سكريبت بايثون جاهز للاستخدام والتحميل الفوري.</p>
+                        </div>
+                        <button class="btn-modern" onclick="openTool('${tool.name}')">عرض الأداة</button>
+                    </div>
+                `;
+            });
+        }
+
+        function filterTools() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allToolsData.filter(tool => tool.name.toLowerCase().includes(query));
+            renderTools(filtered);
         }
 
         async function loadToolDetails(toolName) {
@@ -484,3 +520,4 @@
     </script>
 </body>
 </html>
+
