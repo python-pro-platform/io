@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://python-pro-platform.github.io/io/sitemap.xml
