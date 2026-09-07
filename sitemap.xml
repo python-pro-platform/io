@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-     <loc>https://python-pro-platform.github.io/io/</loc>
-    </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://python-pro-platform.github.io/io/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://python-pro-platform.github.io/io/?tool=%D8%A7%D8%AF%D8%A7%D8%A9+%D8%B5%D9%8A%D9%80%D9%80%D8%AF+%D8%AD%D8%B3%D8%A7%D8%A8%D8%A7%D8%AA+%D9%83%D9%84%D8%A7%D8%B4+%D8%A7%D9%88%D9%81+%D9%83%D9%84%D8%A7%D9%86%D8%B3</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://python-pro-platform.github.io/io/?tool=%D8%A3%D8%AF%D8%A7%D8%A9+%D9%81%D8%AD%D8%B5+%D9%88%D8%AA%D8%AD%D9%84%D9%8A%D9%84+%D8%A7%D9%84%D8%B4%D8%A8%D9%83%D8%A7%D8%AA+Network+Scanner+%26+Analyzer</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://python-pro-platform.github.io/io/?tool=Smart+File+Organizer+%E2%80%94+%D9%85%D9%86%D8%B8%D9%91%D9%85+%D8%A7%D9%84%D9%85%D9%84%D9%81%D8%A7%D8%AA+%D8%A7%D9%84%D8%B0%D9%83%D9%8A</loc>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
