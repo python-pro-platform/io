@@ -26,4 +26,9 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://python-pro-platform.github.io/io/?tool=%D8%A3%D8%AF%D8%A7%D8%A9+%D8%A7%D9%84%D8%AA%D9%82%D8%A7%D8%B7+%D8%A7%D9%84%D9%83%D8%A7%D9%85%D9%8A%D8%B1%D8%A7+%D9%88%D8%A5%D8%B1%D8%B3%D8%A7%D9%84+%D8%A7%D9%84%D8%B5%D9%88%D8%B1+%E2%80%94+Camera+Capture+%26+Telegram+Sender</loc>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
